@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spa Chemical Calculator</title>
+    <style>
+        body {
+            font-family: -apple-system, sans-serif;
+            padding: 15px;
+            margin: 0;
+            background: #f5f5f5;
+        }
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .volume {
+            margin-bottom: 15px;
+        }
+        input {
+            width: 60px;
+            padding: 5px;
+            margin: 2px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: 14px;
+        }
+        th {
+            background: #e0e0e0;
+            text-align: left;
+        }
+        .impact {
+            margin-top: 20px;
+        }
+        .impact p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        @media (max-width: 400px) {
+            input { width: 50px; }
+            th, td { padding: 5px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Spa Chemical Calculator</h1>
+    <div class="volume">
+        <label for="volume">Spa Volume (L):</label>
+        <input type="number" id="volume" placeholder="1000" onchange="updateAll()">
+    </div>
+    
+    <table>
+        <tr>
+            <th>Chemical</th>
+            <th>Current</th>
+            <th>Target</th>
+            <th>Strength</th>
+            <th>Amount</th>
+        </tr>
+        <tr><td>Liquid Chlorine</td><td><input id="b2" type="number" onchange="updateAll()"></td><td><input id="c2" type="number" onchange="updateAll()"></td><td><input id="d2" type="number" step="0.01" value="0.1" onchange="updateAll()"></td><td id="e2"></td></tr>
+        <tr><td>Granular Chlorine</td><td><input id="b3" type="number" onchange="updateAll()"></td><td><input id="c3" type="number" onchange="updateAll()"></td><td><input id="d3" type="number" step="0.01" value="0.7" onchange="updateAll()"></td><td id="e3"></td></tr>
+        <tr><td>Dichlor</td><td><input id="b4" type="number" onchange="updateAll()"></td><td><input id="c4" type="number" onchange="updateAll()"></td><td><input id="d4" type="number" step="0.01" value="0.56" onchange="updateAll()"></td><td id="e4"></td></tr>
+        <tr><td>Bromine</td><td><input id="b5" type="number" onchange="updateAll()"></td><td><input id="c5" type="number" onchange="updateAll()"></td><td><input id="d5" type="number" step="0.01" value="0.98" onchange="updateAll()"></td><td id="e5"></td></tr>
+        <tr><td>HCl (pH Down)</td><td><input id="b6" type="number" onchange="updateAll()"></td><td><input id="c6" type="number" onchange="updateAll()"></td><td><input id="d6" type="number" step="0.01" value="0.3145" onchange="updateAll()"></td><td id="e6"></td></tr>
+        <tr><td>Sodium Bisulfate</td><td><input id="b7" type="number" onchange="updateAll()"></td><td><input id="c7" type="number" onchange="updateAll()"></td><td><input id="d7" type="number" step="0.01" value="0.93" onchange="updateAll()"></td><td id="e7"></td></tr>
+        <tr><td>Sodium Carbonate</td><td><input id="b8" type="number" onchange="updateAll()"></td><td><input id="c8" type="number" onchange="updateAll()"></td><td><input id="d8" type="number" step="0.01" value="1" onchange="updateAll()"></td><td id="e8"></td></tr>
+        <tr><td>Sodium Bicarbonate</td><td><input id="b9" type="number" onchange="updateAll()"></td><td><input id="c9" type="number" onchange="updateAll()"></td><td><input id="d9" type="number" step="0.01" value="1" onchange="updateAll()"></td><td id="e9"></td></tr>
+        <tr><td>Calcium Chloride</td><td><input id="b10" type="number" onchange="updateAll()"></td><td><input id="c10" type="number" onchange="updateAll()"></td><td><input id="d10" type="number" step="0.01" value="0.77" onchange="updateAll()"></td><td id="e10"></td></tr>
+        <tr><td>Cyanuric Acid</td><td><input id="b11" type="number" onchange="updateAll()"></td><td><input id="c11" type="number" onchange="updateAll()"></td><td><input id="d11" type="number" step="0.01" value="1" onchange="updateAll()"></td><td id="e11"></td></tr>
+        <tr><td>Non-Chlorine Shock</td><td><input id="b12" type="number" onchange="updateAll()"></td><td><input id="c12" type="number" onchange="updateAll()"></td><td><input id="d12" type="number" step="0.01" value="0.43" onchange="updateAll()"></td><td id="e12"></td></tr>
+    </table>
+
+    <div class="impact">
+        <h2>Impacts</h2>
+        <p>Alkalinity Drop from HCl: <span id="e14"></span></p>
+        <p>Alkalinity Drop from Sodium Bisulfate: <span id="e15"></span></p>
+        <p>Alkalinity Rise from Sodium Carbonate: <span id="e16"></span></p>
+        <p>Alkalinity Rise from Sodium Bicarbonate: <span id="e17"></span></p>
+        <p>pH Rise from Granular Chlorine: <span id="e18"></span></p>
+        <p>pH Rise from Liquid Chlorine: <span id="e19"></span></p>
+        <p>pH Rise from Sodium Bicarbonate: <span id="e20"></span></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
